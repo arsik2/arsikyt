@@ -1,0 +1,19 @@
+import discord
+from discord.ext import commands
+
+client = discord.Client(intents=discord.Intents().all())
+channelDS = 901891335294967828
+
+@client.event
+async def on_member_join(member):
+    channel = client.get_channel(channelDS)
+    await channel.send(embed = discord.Embed(description = f'Пользователь ``{member}`` наткнулся на наш сервер', colour = discord.Color.green()))
+
+@client.event
+async def on_member_remove(member):
+    channel = client.get_channel(channelDS)
+    await channel.send(embed = discord.Embed(description = f'Пользователь ``{member}`` покинул наш сервер', colour = discord.Color.green()))
+    await member.send(embed = discord.Embed(description = f' ``{member}`` Жаль что вы покинули наш сервер(', colour = discord.Color.green()))
+
+token = 'https://discord.com/api/oauth2/authorize?client_id=812711580675735602&permissions=0&scope=bot'
+client.run(token)
